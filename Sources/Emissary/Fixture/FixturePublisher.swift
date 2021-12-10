@@ -4,6 +4,7 @@ import Foundation
 import Combine
 import AsyncOptional
 
+#if swift(>=5.5)
 extension Request {
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 	func fixturePublisher(for url: URL, using transform: @escaping (Data) throws -> Resource) async throws -> AnyPublisher<Resource, NetworkError> {
@@ -38,3 +39,4 @@ private extension Request  {
 		Just(resource).setFailureType(to: NetworkError.self).eraseToAnyPublisher()
 	}
 }
+#endif

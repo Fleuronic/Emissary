@@ -2,6 +2,7 @@
 
 import Foundation
 
+#if swift(>=5.5)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 actor FixtureCache {
 	private var fixtureStorage: [URL: Any] = [:]
@@ -68,3 +69,4 @@ private extension FixtureCache {
 		responseStorage[name] = response
 	}
 }
+#endif

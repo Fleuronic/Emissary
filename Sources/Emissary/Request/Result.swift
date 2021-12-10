@@ -2,6 +2,7 @@
 
 import Combine
 
+#if swift(>=5.5)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 public extension Request where Response: Decodable {
 	var returnedResult: Result<Resource, NetworkError> {
@@ -41,3 +42,4 @@ public extension Request where Response: DataDecodable {
 		}
 	}
 }
+#endif

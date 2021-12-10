@@ -21,6 +21,7 @@ public extension Request where Resource == Void {
     }
 }
 
+#if swift(>=5.5)
 // MARK: -
 extension Request where Response: Decodable {
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
@@ -39,6 +40,7 @@ extension Request where Response: DataDecodable {
 		}
 	}
 }
+#endif
 
 // MARK: -
 private extension Request {
@@ -46,6 +48,7 @@ private extension Request {
 		dataTaskPublisher(using: transform)
 	}
 
+	#if swift(>=5.5)
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 	func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
 		if let url = fixturesURL {
@@ -57,6 +60,7 @@ private extension Request {
 		}
 		return dataTaskPublisher(using: transform)
 	}
+	#endif
 
 	func dataTaskPublisher(using transform: @escaping (Data) throws -> Resource) -> AnyPublisher<Resource, NetworkError> {
 		URLSession.shared
