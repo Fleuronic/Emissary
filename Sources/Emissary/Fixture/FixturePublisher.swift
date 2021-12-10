@@ -6,7 +6,9 @@ import AsyncOptional
 
 #if swift(>=5.5)
 extension Request {
+	#if swift(<5.5.2)
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+	#endif
 	func fixturePublisher(for url: URL, using transform: @escaping (Data) throws -> Resource) async throws -> AnyPublisher<Resource, NetworkError> {
 		let fixtures: [Fixture<DecodingAPI>] = try await FixtureCache.fixtures(for: url)
 		let fixture = try fixtures.first { try $0.matches(request: urlRequest) }

@@ -24,7 +24,9 @@ public extension Request where Resource == Void {
 #if swift(>=5.5)
 // MARK: -
 extension Request where Response: Decodable {
+	#if swift(<5.5.2)
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+	#endif
 	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
 		get async {
 			await publisher(using: parse)
@@ -33,7 +35,9 @@ extension Request where Response: Decodable {
 }
 
 extension Request where Response: DataDecodable {
+	#if swift(<5.5.2)
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+	#endif
 	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
 		get async {
 			await publisher(using: parse)
@@ -49,7 +53,9 @@ private extension Request {
 	}
 
 	#if swift(>=5.5)
+	#if swift(<5.5.2)
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+	#endif
 	func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
 		if let url = fixturesURL {
 			do {

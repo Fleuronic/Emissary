@@ -3,7 +3,9 @@
 import Foundation
 
 #if swift(>=5.5)
+#if swift(<5.5.2)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+#endif
 actor FixtureCache {
 	private var fixtureStorage: [URL: Any] = [:]
 	private var responseStorage: [String: Any] = [:]
@@ -14,7 +16,9 @@ actor FixtureCache {
 }
 
 // MARK: -
+#if swift(<5.5.2)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+#endif
 extension FixtureCache {
 	static func fixtures<API: Emissary.API>(for url: URL) async throws -> [Fixture<API>] {
 		guard let fixtures = await shared.fixtureStorage[url] as? [Fixture<API>] else {
@@ -59,7 +63,9 @@ extension FixtureCache {
 }
 
 // MARK: -
+#if swift(<5.5.2)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+#endif
 private extension FixtureCache {
 	func set<API: Emissary.API>(_ fixtures: [Fixture<API>], for url: URL) {
 		fixtureStorage[url] = fixtures
