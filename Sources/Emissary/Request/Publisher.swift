@@ -5,8 +5,8 @@ import Foundation
 
 public extension Request where Response: Decodable {
 	var publisher: AnyPublisher<Resource, NetworkError> {
-        publisher(using: parse)
-    }
+		publisher(using: parse)
+	}
 }
 
 public extension Request where Response: DataDecodable {
@@ -17,33 +17,45 @@ public extension Request where Response: DataDecodable {
 
 public extension Request where Resource == Void {
 	var publisher: AnyPublisher<Void, NetworkError> {
-        publisher(using: discard)
-    }
+		publisher(using: discard)
+	}
 }
 
 #if swift(>=5.5)
-// MARK: -
-extension Request where Response: Decodable {
-	#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
-	#endif
-	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
-		get async {
-			await publisher(using: parse)
-		}
+	// MARK: -
+	extension Request where Response: Decodable {
+		#if swift(<5.5.2)
+			@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+			var asyncPublisher: AnyPublisher<Resource, NetworkError> {
+				get async {
+					await publisher(using: parse)
+				}
+			}
+		#else
+			var asyncPublisher: AnyPublisher<Resource, NetworkError> {
+				get async {
+					await publisher(using: parse)
+				}
+			}
+		#endif
 	}
-}
 
-extension Request where Response: DataDecodable {
-	#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
-	#endif
-	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
-		get async {
-			await publisher(using: parse)
-		}
+	extension Request where Response: DataDecodable {
+		#if swift(<5.5.2)
+			@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+			var asyncPublisher: AnyPublisher<Resource, NetworkError> {
+				get async {
+					await publisher(using: parse)
+				}
+			}
+		#else
+			var asyncPublisher: AnyPublisher<Resource, NetworkError> {
+				get async {
+					await publisher(using: parse)
+				}
+			}
+		#endif
 	}
-}
 #endif
 
 // MARK: -
@@ -53,19 +65,30 @@ private extension Request {
 	}
 
 	#if swift(>=5.5)
-	#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
-	#endif
-	func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
-		if let url = fixturesURL {
-			do {
-				return try await fixturePublisher(for: url, using: transform)
-			} catch {
-				return fixturePublisher(for: .other(error))
+		#if swift(<5.5.2)
+			@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+			func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
+				if let url = fixturesURL {
+					do {
+						return try await fixturePublisher(for: url, using: transform)
+					} catch {
+						return fixturePublisher(for: .other(error))
+					}
+				}
+				return dataTaskPublisher(using: transform)
 			}
-		}
-		return dataTaskPublisher(using: transform)
-	}
+		#else
+			func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
+				if let url = fixturesURL {
+					do {
+						return try await fixturePublisher(for: url, using: transform)
+					} catch {
+						return fixturePublisher(for: .other(error))
+					}
+				}
+				return dataTaskPublisher(using: transform)
+			}
+		#endif
 	#endif
 
 	func dataTaskPublisher(using transform: @escaping (Data) throws -> Resource) -> AnyPublisher<Resource, NetworkError> {
@@ -121,5 +144,5 @@ private extension Request where Response: DataDecodable {
 }
 
 private extension Request where Resource == Void {
-    func discard(_: Data) throws {}
+	func discard(_: Data) throws {}
 }

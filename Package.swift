@@ -19,7 +19,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncOptional", from: "0.1.0"),
+		.package(url: "https://github.com/Fleuronic/AsyncOptional", from: "0.1.0")
 	],
 	targets: [
 		.target(

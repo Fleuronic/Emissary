@@ -33,7 +33,7 @@ public extension SubpathRepresentable {
 	}
 
 	static func subpath(to pathComponents: PathComponents...) -> Subpath {
-		return .init(components: pathComponents)
+		.init(components: pathComponents)
 	}
 
 	static func subpath<Value: PathComponent>(to value: Value, to pathComponents: PathComponents...) -> Subpath {

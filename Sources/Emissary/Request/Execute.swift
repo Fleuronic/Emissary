@@ -7,15 +7,15 @@ public extension Request where Response: Decodable {
 		success: @escaping (Resource) -> Void = { _ in },
 		failure: @escaping (NetworkError) -> Void = { _ in }
 	) {
-        var cancellable: AnyCancellable?
-        cancellable = publisher.sink {
-            guard case let .failure(error) = $0 else { return }
-            failure(error)
-        } receiveValue: {
-            cancellable?.cancel()
-            success($0)
-        }
-    }
+		var cancellable: AnyCancellable?
+		cancellable = publisher.sink {
+			guard case let .failure(error) = $0 else { return }
+			failure(error)
+		} receiveValue: {
+			cancellable?.cancel()
+			success($0)
+		}
+	}
 
 	func callAsFunction(
 		success: @escaping (Resource) -> Void = { _ in },
@@ -44,7 +44,7 @@ public extension Request where Response: DataDecodable {
 	}
 
 	func callAsFunction(
-		success: @escaping (Resource) -> Void = { _ in},
+		success: @escaping (Resource) -> Void = { _ in },
 		failure: @escaping (NetworkError) -> Void = { _ in }
 	) {
 		execute(

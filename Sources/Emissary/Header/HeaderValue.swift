@@ -5,8 +5,8 @@ public protocol HeaderValue {
 }
 
 // MARK: -
-extension HeaderValue where Self: CustomStringConvertible {
-	public var stringValue: String { description }
+public extension HeaderValue where Self: CustomStringConvertible {
+	var stringValue: String { description }
 }
 
 // MARK: -

@@ -1,7 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-extension CodingStrategy {
-	public enum EncodingContext {
+public extension CodingStrategy {
+	enum EncodingContext {
 		case parameters
 		case payload
 		case serialization

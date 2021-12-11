@@ -24,7 +24,6 @@ public extension API {
 		)
 	}
 
-
 	func deleteResource<ResourceParameters: Parameters, Resource: PathAccessible, ReturnedResource: Decodable>(ofType type: Resource.Type, specifying parameters: ResourceParameters) -> Request<ReturnedResource> {
 		let path = type.path
 		return deleteResource(at: path, specifying: parameters)
