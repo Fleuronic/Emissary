@@ -15,6 +15,7 @@ actor FixtureCache {
 }
 
 // MARK: -
+@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 extension FixtureCache {
 	static func fixtures<API: Emissary.API>(for url: URL) async throws -> [Fixture<API>] {
 		guard let fixtures = await shared.fixtureStorage[url] as? [Fixture<API>] else {
@@ -55,6 +56,18 @@ extension FixtureCache {
 		}
 
 		return response
+	}
+}
+
+// MARK: -
+@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
+private extension FixtureCache {
+	func set<API: Emissary.API>(_ fixtures: [Fixture<API>], for url: URL) {
+		fixtureStorage[url] = fixtures
+	}
+
+	func set<API: Emissary.API, Response>(_ response: Result<Response, NetworkError<API.Error>>, for name: String, using _: API.Type) {
+		responseStorage[name] = response
 	}
 }
 #else
@@ -110,7 +123,7 @@ extension FixtureCache {
 		return response
 	}
 }
-#endif
+
 // MARK: -
 private extension FixtureCache {
 	func set<API: Emissary.API>(_ fixtures: [Fixture<API>], for url: URL) {
@@ -121,4 +134,5 @@ private extension FixtureCache {
 		responseStorage[name] = response
 	}
 }
+#endif
 #endif
