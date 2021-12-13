@@ -18,7 +18,7 @@ public extension PathAccessible {
 	}
 
 	static func path(to pathComponent: PathComponents) -> Path {
-		let subpath = subpath(to: pathComponent)
+		let subpath = self.subpath(to: pathComponent)
 		return .init(components: subpath.components)
 	}
 
@@ -27,7 +27,7 @@ public extension PathAccessible {
 	}
 
 	static func path<Value: PathComponent>(to value: Value, to pathComponents: PathComponents...) -> Path {
-		let subpath = subpath(to: value, to: pathComponents)
+		let subpath = self.subpath(to: value, to: pathComponents)
 		return .init(components: subpath.components)
 	}
 }
