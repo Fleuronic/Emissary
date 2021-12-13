@@ -8,13 +8,13 @@ public extension Request where Response: Decodable {
 		failure: @escaping (NetworkError) -> Void = { _ in }
 	) {
 		var cancellable: AnyCancellable?
-		cancellable = publisher.sink {
+		cancellable = publisher.sink(receiveCompletion: {
 			guard case let .failure(error) = $0 else { return }
 			failure(error)
-		} receiveValue: {
+		}, receiveValue: {
 			cancellable?.cancel()
 			success($0)
-		}
+		})
 	}
 
 	func callAsFunction(
@@ -34,13 +34,13 @@ public extension Request where Response: DataDecodable {
 		failure: @escaping (NetworkError) -> Void = { _ in }
 	) {
 		var cancellable: AnyCancellable?
-		cancellable = publisher.sink {
+		cancellable = publisher.sink(receiveCompletion: {
 			guard case let .failure(error) = $0 else { return }
 			failure(error)
-		} receiveValue: {
+		}, receiveValue: {
 			cancellable?.cancel()
 			success($0)
-		}
+		})
 	}
 
 	func callAsFunction(
@@ -60,13 +60,13 @@ public extension Request where Resource == Void {
 		failure: @escaping (NetworkError) -> Void = { _ in }
 	) {
 		var cancellable: AnyCancellable?
-		cancellable = publisher.sink {
+		cancellable = publisher.sink(receiveCompletion: {
 			guard case let .failure(error) = $0 else { return }
 			failure(error)
-		} receiveValue: {
+		}, receiveValue: {
 			cancellable?.cancel()
 			success()
-		}
+		})
 	}
 
 	func callAsFunction(

@@ -8,7 +8,7 @@ public struct Path {
 extension Path {
 	func stringValue(using encodingStrategy: PathEncodingStrategy) -> String {
 		components
-			.map(\.rawValue)
+			.map { $0.rawValue }
 			.map(encodingStrategy.encode)
 			.joined(separator: .slash)
 	}

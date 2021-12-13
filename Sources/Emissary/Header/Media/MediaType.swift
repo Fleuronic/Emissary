@@ -18,7 +18,7 @@ extension MediaType: HeaderValue {
 	public var stringValue: String {
 		let components: [MediaTypeComponent] = [topLevelType, subtype]
 		return components
-			.map(\.rawValue)
+			.map { $0.rawValue }
 			.joined(separator: .slash)
 	}
 }
