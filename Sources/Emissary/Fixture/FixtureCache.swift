@@ -1,6 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 #if swift(>=5.5)
 #if swift(<5.5.2)

@@ -1,6 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public enum StatusCode: Int {
 	case `continue` = 100

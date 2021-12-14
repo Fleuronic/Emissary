@@ -8,6 +8,9 @@ import CombineX
 #endif
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import AsyncOptional
 
 extension Request {
