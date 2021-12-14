@@ -1,6 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 #if canImport(Combine)
 import Combine
 #else
