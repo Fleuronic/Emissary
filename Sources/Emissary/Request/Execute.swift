@@ -1,6 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+#if canImport(Combine)
 import Combine
+#else
+import CombineX
+#endif
 
 public extension Request where Response: Decodable {
 	func execute(

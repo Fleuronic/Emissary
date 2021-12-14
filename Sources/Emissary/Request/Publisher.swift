@@ -1,7 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Combine
 import Foundation
+#if canImport(Combine)
+import Combine
+#else
+import CombineX
+#endif
 
 public extension Request where Response: Decodable {
 	var publisher: AnyPublisher<Resource, NetworkError> {

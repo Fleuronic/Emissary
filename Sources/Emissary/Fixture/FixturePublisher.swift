@@ -1,7 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Foundation
+#if canImport(Combine)
 import Combine
+#else
+import CombineX
+#endif
+
+import Foundation
 import AsyncOptional
 
 #if swift(>=5.5)

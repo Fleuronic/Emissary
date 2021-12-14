@@ -9,6 +9,6 @@ public struct Request<Response: APIResponse, DecodingAPI: API> {
 
 // MARK: -
 public extension Request {
-	typealias Resource = Response.Data
+	typealias Resource = Response.ResponseData
 	typealias NetworkError = Emissary.NetworkError<DecodingAPI.Error>
 }

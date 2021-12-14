@@ -1,6 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+#if canImport(Combine)
 import Combine
+#else
+import CombineX
+#endif
 
 #if swift(>=5.5)
 #if swift(<5.5.2)
