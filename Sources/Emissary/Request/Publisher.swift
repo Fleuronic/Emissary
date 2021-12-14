@@ -100,6 +100,15 @@ private extension Request {
 #endif
 
 	func dataTaskPublisher(using transform: @escaping (Data) throws -> Resource) -> AnyPublisher<Resource, NetworkError> {
+#if os(Linux)
+		URLSession.shared.cx
+			.dataTaskPublisher(for: urlRequest)
+			.tryMap(process)
+			.tryMap(transform)
+			.mapError(NetworkError.init)
+			.receive(on: DispatchQueue.main)
+			.eraseToAnyPublisher()
+#else
 		URLSession.shared
 			.dataTaskPublisher(for: urlRequest)
 			.tryMap(process)
@@ -107,6 +116,7 @@ private extension Request {
 			.mapError(NetworkError.init)
 			.receive(on: DispatchQueue.main)
 			.eraseToAnyPublisher()
+#endif
 	}
 
 	func process(_ data: Data?, with response: URLResponse?) throws -> Data {
