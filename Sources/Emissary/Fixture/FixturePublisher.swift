@@ -1,5 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+#if swift(>=5.5)
 #if canImport(Combine)
 import Combine
 #else
@@ -9,7 +10,6 @@ import CombineX
 import Foundation
 import AsyncOptional
 
-#if swift(>=5.5)
 extension Request {
 #if swift(<5.5.2)
 	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
