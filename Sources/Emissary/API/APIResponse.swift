@@ -1,7 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 public protocol APIResponse {
-	associatedtype Data
+	associatedtype ResponseData
 
-	var data: Data { get }
+	var data: ResponseData { get }
 }
