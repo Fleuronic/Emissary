@@ -117,7 +117,7 @@ private extension Request {
 			.tryMap(process)
 			.tryMap(transform)
 			.mapError(NetworkError.init)
-			.receive(on: DispatchQueue.main)
+			.receive(on: RunLoop.main)
 			.eraseToAnyPublisher()
 	}
 #endif
