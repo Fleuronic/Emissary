@@ -9,6 +9,7 @@ import FoundationNetworking
 import Combine
 #else
 import CombineX
+import CXFoundation
 #endif
 
 public extension Request where Response: Decodable {
@@ -99,9 +100,9 @@ private extension Request {
 #endif
 #endif
 
-#if os(Linux)
+#if canImport(Combine)
 	func dataTaskPublisher(using transform: @escaping (Data) throws -> Resource) -> AnyPublisher<Resource, NetworkError> {
-		FoundationNetworking.URLSession.shared.cx
+		URLSession.shared
 			.dataTaskPublisher(for: urlRequest)
 			.tryMap(process)
 			.tryMap(transform)
@@ -111,7 +112,7 @@ private extension Request {
 	}
 #else
 	func dataTaskPublisher(using transform: @escaping (Data) throws -> Resource) -> AnyPublisher<Resource, NetworkError> {
-		URLSession.shared
+		URLSession.shared.cx
 			.dataTaskPublisher(for: urlRequest)
 			.tryMap(process)
 			.tryMap(transform)
