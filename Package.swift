@@ -20,7 +20,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncOptional", from: "0.1.0"),
+		.package(url: "https://github.com/Fleuronic/AsyncExtensions", from: "0.3.1"),
 		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0"),
 	],
 	targets: [
@@ -28,7 +28,7 @@ let package = Package(
 			name: "Emissary",
 			dependencies: [
 				"AnyCodable",
-				"AsyncOptional",
+				"AsyncExtensions",
 				"CombineX"
 			]
 		)
@@ -51,14 +51,14 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncOptional", from: "0.1.0"),
+		.package(url: "https://github.com/Fleuronic/AsyncExtensions", from: "0.1.0"),
 	],
 	targets: [
 		.target(
 			name: "Emissary",
 			dependencies: [
 				"AnyCodable",
-				"AsyncOptional"
+				"AsyncExtensions"
 			]
 		),
 		.testTarget(
@@ -84,14 +84,14 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncOptional", from: "0.1.0")
+		.package(url: "https://github.com/Fleuronic/AsyncExtensions", from: "0.1.0")
 	],
 	targets: [
 		.target(
 			name: "Emissary",
 			dependencies: [
 				"AnyCodable",
-				"AsyncOptional"
+				"AsyncExtensions"
 			]
 		)
 	]
