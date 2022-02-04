@@ -11,7 +11,7 @@ import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-import AsyncOptional
+import AsyncExtensions
 
 extension Request {
 #if swift(<5.5.2)
