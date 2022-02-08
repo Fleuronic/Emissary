@@ -8,7 +8,7 @@ import FoundationNetworking
 #if swift(>=5.5)
 #if swift(<5.5.2)
 @available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
-actor FixtureCache {
+class FixtureCache {
 	private var fixtureStorage: [URL: Any] = [:]
 	private var responseStorage: [String: Any] = [:]
 
@@ -74,7 +74,7 @@ private extension FixtureCache {
 	}
 }
 #else
-actor FixtureCache {
+class FixtureCache {
 	private var fixtureStorage: [URL: Any] = [:]
 	private var responseStorage: [String: Any] = [:]
 
@@ -86,10 +86,10 @@ actor FixtureCache {
 // MARK: -
 extension FixtureCache {
 	static func fixtures<API: Emissary.API>(for url: URL) async throws -> [Fixture<API>] {
-		guard let fixtures = await shared.fixtureStorage[url] as? [Fixture<API>] else {
+		guard let fixtures = shared.fixtureStorage[url] as? [Fixture<API>] else {
 			let data = try Data(contentsOf: url, options: [])
 			let fixtures = try API.decoder.decode([Fixture<API>].self, from: data)
-			await shared.set(fixtures, for: url)
+			shared.set(fixtures, for: url)
 			return fixtures
 		}
 
@@ -99,7 +99,7 @@ extension FixtureCache {
 	static func response<API: Emissary.API, Resource>(for fixture: Fixture<API>, from url: URL, using transform: @escaping (Data) throws -> Resource) async throws -> Result<Resource, NetworkError<API.Error>> {
 		let name = fixture.responseName
 
-		guard let response = await shared.responseStorage[name] as? Result<Resource, NetworkError<API.Error>> else {
+		guard let response = shared.responseStorage[name] as? Result<Resource, NetworkError<API.Error>> else {
 			let url = url
 				.deletingLastPathComponent()
 				.appendingPathComponent(name)
@@ -119,7 +119,7 @@ extension FixtureCache {
 				)
 			}
 
-			await shared.set(response, for: name, using: API.self)
+			shared.set(response, for: name, using: API.self)
 			return response
 		}
 
