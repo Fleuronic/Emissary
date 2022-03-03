@@ -1,6 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-#if swift(>=5.5)
 #if canImport(Combine)
 import Combine
 #else
@@ -11,16 +10,13 @@ import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-import AsyncExtensions
 
 extension Request {
-#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
-	func fixturePublisher(for url: URL, using transform: @escaping (Data) throws -> Resource) async throws -> AnyPublisher<Resource, NetworkError> {
-		let fixtures: [Fixture<DecodingAPI>] = try await FixtureCache.fixtures(for: url)
+	func fixturePublisher(for url: URL, using transform: @escaping (Data) throws -> Resource) throws -> AnyPublisher<Resource, NetworkError> {
+		let fixtures: [Fixture<DecodingAPI>] = try FixtureCache.fixtures(for: url)
 		let fixture = try fixtures.first { try $0.matches(request: urlRequest) }
-		let result: Result<Resource, NetworkError>? = try await fixture.asyncMap {
-			try await FixtureCache.response(for: $0, from: url, using: transform)
+		let result: Result<Resource, NetworkError>? = try fixture.map {
+			try FixtureCache.response(for: $0, from: url, using: transform)
 		}
 
 		switch result {
@@ -32,24 +28,6 @@ extension Request {
 			return fixturePublisher(for: error)
 		}
 	}
-#else
-	func fixturePublisher(for url: URL, using transform: @escaping (Data) throws -> Resource) async throws -> AnyPublisher<Resource, NetworkError> {
-		let fixtures: [Fixture<DecodingAPI>] = try await FixtureCache.fixtures(for: url)
-		let fixture = try fixtures.first { try $0.matches(request: urlRequest) }
-		let result: Result<Resource, NetworkError>? = try await fixture.asyncMap {
-			try await FixtureCache.response(for: $0, from: url, using: transform)
-		}
-
-		switch result {
-		case .none:
-			return noDataPublisher
-		case let .success(resource):
-			return fixturePublisher(for: resource)
-		case let .failure(error):
-			return fixturePublisher(for: error)
-		}
-	}
-#endif
 
 	func fixturePublisher(for error: NetworkError) -> AnyPublisher<Resource, NetworkError> {
 		Fail(error: error).eraseToAnyPublisher()
@@ -66,4 +44,3 @@ private extension Request {
 		Just(resource).setFailureType(to: NetworkError.self).eraseToAnyPublisher()
 	}
 }
-#endif
