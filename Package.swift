@@ -20,7 +20,6 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncExtensions", from: "0.3.1"),
 		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0"),
 		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
 		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
@@ -30,7 +29,6 @@ let package = Package(
 			name: "Emissary",
 			dependencies: [
 				"AnyCodable",
-				"AsyncExtensions",
 				"CombineX"
 			]
 		),
@@ -61,7 +59,6 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncExtensions", from: "0.1.0"),
 		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
 		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
@@ -69,8 +66,7 @@ let package = Package(
 		.target(
 			name: "Emissary",
 			dependencies: [
-				"AnyCodable",
-				"AsyncExtensions"
+				"AnyCodable"
 			]
 		),
 		.target(
@@ -104,7 +100,6 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/Fleuronic/AsyncExtensions", from: "0.1.0"),
 		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
 		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
@@ -113,7 +108,6 @@ let package = Package(
 			name: "Emissary",
 			dependencies: [
 				"AnyCodable",
-				"AsyncExtensions",
 			]
 		),
 		.target(
