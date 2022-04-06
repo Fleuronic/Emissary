@@ -5,8 +5,6 @@ import Combine
 import RxSwift
 import RxCombine
 
-import UIKit
-
 public extension Request where Response: Decodable {
 	var returnedResult: Single<Result<Resource, NetworkError>> {
 		publisher.asResultSingle()
