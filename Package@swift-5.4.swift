@@ -20,7 +20,10 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
-		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0")
+		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0"),
+		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
+		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
 	targets: [
 		.target(
@@ -28,6 +31,21 @@ let package = Package(
 			dependencies: [
 				"AnyCodable",
 				"CombineX"
+			]
+		),
+		.target(
+			name: "Emissary-ReactiveSwift",
+			dependencies: [
+				"Emissary",
+				"ReactiveSwift"
+			]
+		),
+		.target(
+			name: "Emissary-RxSwift",
+			dependencies: [
+				"Emissary",
+				"RxSwift",
+				"RxCombine"
 			]
 		)
 	]
@@ -48,12 +66,32 @@ let package = Package(
 		)
 	],
 	dependencies: [
-		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0")
+		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
+		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
+		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
 	targets: [
 		.target(
 			name: "Emissary",
-			dependencies: ["AnyCodable"]
+			dependencies: [
+				"AnyCodable"
+			]
+		),
+		.target(
+			name: "Emissary-ReactiveSwift",
+			dependencies: [
+				"Emissary",
+				"ReactiveSwift"
+			]
+		),
+		.target(
+			name: "Emissary-RxSwift",
+			dependencies: [
+				"Emissary",
+				"RxSwift",
+				"RxCombine"
+			]
 		),
 		.testTarget(
 			name: "EmissaryTests",
@@ -77,12 +115,32 @@ let package = Package(
 		)
 	],
 	dependencies: [
-		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0")
+		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
+		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
+		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
 	targets: [
 		.target(
 			name: "Emissary",
-			dependencies: ["AnyCodable"]
+			dependencies: [
+				"AnyCodable",
+			]
+		),
+		.target(
+			name: "Emissary-ReactiveSwift",
+			dependencies: [
+				"Emissary",
+				"ReactiveSwift"
+			]
+		),
+		.target(
+			name: "Emissary-RxSwift",
+			dependencies: [
+				"Emissary",
+				"RxSwift",
+				"RxCombine"
+			]
 		)
 	]
 )

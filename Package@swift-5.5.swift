@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -18,7 +18,7 @@ let package = Package(
 			targets: ["Emissary"]
 		)
 	],
-	dependencies: [
+	dependeencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
 		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0"),
 		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
