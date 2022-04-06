@@ -1,7 +1,13 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import Emissary
+
+#if canImport(Combine)
 import Combine
+#else
+import CombineX
+#endif
+
 import RxSwift
 import RxCombine
 
