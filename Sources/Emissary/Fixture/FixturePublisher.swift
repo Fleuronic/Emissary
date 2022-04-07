@@ -2,7 +2,7 @@
 
 #if canImport(Combine)
 import Combine
-#else
+#elseif canImport(CombineX)
 import CombineX
 #endif
 

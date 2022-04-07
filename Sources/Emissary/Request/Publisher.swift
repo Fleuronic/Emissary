@@ -7,7 +7,7 @@ import FoundationNetworking
 
 #if canImport(Combine)
 import Combine
-#else
+#elseif canImport(CombineX) 
 import CombineX
 import CXFoundation
 #endif
@@ -33,37 +33,19 @@ public extension Request where Resource == Void {
 #if swift(>=5.5)
 // MARK: -
 extension Request where Response: Decodable {
-#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
 		get async {
 			await publisher(using: parse)
 		}
 	}
-#else
-	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
-		get async {
-			await publisher(using: parse)
-		}
-	}
-#endif
 }
 
 extension Request where Response: DataDecodable {
-#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
 		get async {
 			await publisher(using: parse)
 		}
 	}
-#else
-	var asyncPublisher: AnyPublisher<Resource, NetworkError> {
-		get async {
-			await publisher(using: parse)
-		}
-	}
-#endif
 }
 #endif
 
@@ -75,8 +57,6 @@ private extension Request {
 
 
 #if swift(>=5.5)
-#if swift(<5.5.2)
-	@available(iOS 15, macOS 12, watchOS 8, tvOS 15, *)
 	func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
 		if let url = fixturesURL {
 			do {
@@ -87,18 +67,6 @@ private extension Request {
 		}
 		return dataTaskPublisher(using: transform)
 	}
-#else
-	func publisher(using transform: @escaping (Data) throws -> Resource) async -> AnyPublisher<Resource, NetworkError> {
-		if let url = fixturesURL {
-			do {
-				return try fixturePublisher(for: url, using: transform)
-			} catch {
-				return fixturePublisher(for: .other(error))
-			}
-		}
-		return dataTaskPublisher(using: transform)
-	}
-#endif
 #endif
 
 #if canImport(Combine)
