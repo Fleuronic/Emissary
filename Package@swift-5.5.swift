@@ -22,7 +22,7 @@ let package = Package(
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
 		.package(url: "https://github.com/cx-org/CombineX", from: "0.4.0"),
 		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
-		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+		.package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.5.0"),
 		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
 	targets: [
@@ -68,7 +68,7 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
 		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
-		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+		.package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.5.0"),
 		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
 	targets: [
@@ -117,7 +117,7 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
 		.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
-		.package(url: "https://github.com/ReactiveX/RxSwift.git", .exact("6.5.0")),
+		.package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.5.0"),
 		.package(url: "https://github.com/CombineCommunity/RxCombine.git", from: "2.0.0")
 	],
 	targets: [
