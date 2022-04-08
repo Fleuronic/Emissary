@@ -37,7 +37,7 @@ var targets: [Target] = [
 	)
 ]
 
-#if !(os(watchOS) && swift(<5.4))
+#if swift(>=5.4)
 targets.append(.testTarget(name: "EmissaryTests", dependencies: ["Emissary"]))
 #endif
 
