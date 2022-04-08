@@ -15,6 +15,32 @@ dependencies.append(.package(url: "https://github.com/cx-org/CombineX", from: "0
 mainTargetDependencies.append("CombineX")
 #endif
 
+var targets: [Target] = [
+	.target(
+		name: "Emissary",
+		dependencies: mainTargetDependencies
+	),
+	.target(
+		name: "Emissary-ReactiveSwift",
+		dependencies: [
+			"Emissary",
+			"ReactiveSwift"
+		]
+	),
+	.target(
+		name: "Emissary-RxSwift",
+		dependencies: [
+			"Emissary",
+			"RxSwift",
+			"RxCombine"
+		]
+	)
+]
+
+#if !(os(watchOS) && swift(<5.4))
+targets.append(.testTarget(name: "EmissaryTests", dependencies: ["Emissary"]))
+#endif
+
 let package = Package(
 	name: "Emissary",
 	platforms: [
@@ -30,29 +56,5 @@ let package = Package(
 		)
 	],
 	dependencies: dependencies,
-	targets: [
-		.target(
-			name: "Emissary",
-			dependencies: mainTargetDependencies
-		),
-		.target(
-			name: "Emissary-ReactiveSwift",
-			dependencies: [
-				"Emissary",
-				"ReactiveSwift"
-			]
-		),
-		.target(
-			name: "Emissary-RxSwift",
-			dependencies: [
-				"Emissary",
-				"RxSwift",
-				"RxCombine"
-			]
-		),
-		.testTarget(
-			name: "EmissaryTests",
-			dependencies: ["Emissary"]
-		)
-	]
+	targets: targets
 )
