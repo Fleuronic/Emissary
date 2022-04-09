@@ -3,7 +3,7 @@
 import PackageDescription
 
 var dependencies: [Package.Dependency] = [
-	.package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.0"),
+	.package(url: "https://github.com/Flight-School/AnyCodable", .exact("0.6.2")),
 	.package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "6.1.0"),
 	.package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.5.0"),
 	.package(url: "https://github.com/Fleuronic/RxCombine.git", .branch("linux"))
